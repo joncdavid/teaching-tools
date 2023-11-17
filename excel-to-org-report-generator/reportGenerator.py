@@ -202,14 +202,9 @@ class OrgReportFactory(object):
         self.sheet = sheet
 
     def _getVal( self, targetLabel, sheet, rowID ):
-        #print( "[debug] in _getVal() ..." )
-        #print( "\t[debug] targetLabel: {}".format( targetLabel ))
-        #print( "\t[debug] rowID: {}".format( rowID ))
         colID = colMap[ targetLabel ]
-        #print( "\t[debug] colID: {}".format( colID ))
         cell_obj = sheet.cell( row=rowID, column=colID )
         val = cell_obj.value
-        #print( "\t[debug] val: {}".format( val ))
         return val
 
     def genReport(self, rowID ):
@@ -229,7 +224,6 @@ class OrgReportFactory(object):
     def _pop_q1( self, rowID, r ):
         r.q1grade = self._getVal( "q1grade", self.sheet, rowID )
         r.q1comment = self._getVal ( "q1comment", self.sheet, rowID )
-        #print( "[debug] r.q1grade: {}".format( r.q1grade ))
         r.score_q1 = float( r.q1grade )
         return r
     
