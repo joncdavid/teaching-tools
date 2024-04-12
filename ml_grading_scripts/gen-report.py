@@ -82,14 +82,14 @@ for rowID in selected_rowID_list:
         rec3 = r.student3Name.split(',')
     if r.student4Name is not None:
         rec4 = r.student4Name.split(',')
-    filename = rec[0]
+    filename = rec[0]  ## lastname only## "test.org"
     if rec2:
         filename += '_' + rec2[0]
     if rec3:
         filename += '_' + rec3[0]
     if rec4:
         filename += '_' + rec4[0]
-    outf = "output/{}.txt".format( filename ) ## lastname only## "test.org"
+    outf = "output/{}.txt".format( filename )
     if not os.path.exists('output'):
         os.mkdir('output')
     r.write_to_file( outf )

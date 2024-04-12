@@ -21,6 +21,9 @@ class OrgReport(object):
         self.p_grade = 0.0
         self.project_score = 0.0
 
+        self.extra = 0.0
+        self.extra_score = 0.0
+
         self.pdf = 0.0
         self.pdf_comments = None
         self.pkg = 0.0
@@ -71,6 +74,8 @@ class OrgReport(object):
             print("\t studentNames: {}, {}, {}, {}".format(self.student1Name, self.student2Name, self.student3Name, self.student4Name))
 
         print( "\t overall grade: {}".format( self.p_grade ))
+
+        print( "\t extra points: {}".format( self.extra ))
 
         print( "\t pdf: {}".format( self.pdf ))
         print( "\t pdf_comments: {}".format( self.pdf_comments ))
@@ -125,7 +130,9 @@ class OrgReport(object):
                                                            self.student4Name)
 
         f.write( "Project 1 Report for: {}\n".format( student_names ) )
-        f.write( "Score: {}/90\n\n".format( self.project_score ))
+        f.write( "Score: {}/100\n\n".format( self.project_score ))
+
+        f.write("Extra Points: {}/10\n\n".format(self.extra))
 
         f.write( "Deliverables [{}/10 points]\n".format(self.deliverables_score))
         f.write( "+ PDF: {}/2, notes: {}\n".format( self.pdf, self._none2good(self.pdf_comments) ))
@@ -168,15 +175,21 @@ class OrgReportFactory(object):
         r.student3Name = self._getVal("student3Name", self.sheet, rowID)
         r.student4Name = self._getVal("student4Name", self.sheet, rowID)
         r = self._pop_overall_project_grade(rowID, r)
+        r = self._pop_extra_points(rowID, r)
         r = self._pop_deliverables(rowID, r)
         r = self._pop_code(rowID, r)
         r = self._pop_analysis(rowID, r)
-        r.project_score = r.deliverables_score + r.analysis_score + r.code_score
+        r.project_score = r.deliverables_score + r.analysis_score + r.code_score + r.extra_score
         return r
 
     def _pop_overall_project_grade(self, rowID, r):
         r.p_grade =self._getVal('p_grade', self.sheet, rowID)
         # r.p_score = float(r.p_grade)
+        return r
+
+    def _pop_extra_points(self, rowID, r):
+        r.extra =self._getVal('extra', self.sheet, rowID)
+        r.extra_score = float(r.extra)
         return r
 
     def _pop_deliverables(self, rowID, r):

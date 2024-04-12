@@ -22,6 +22,9 @@ colMap[ "student4Name" ] = 5
 ## Overall Project Grade
 colMap[ "p_grade" ] = 8 ## column H
 
+## Extra Points
+colMap["extra"] = 9
+
 ## Deliverables
 colMap[ "pdf" ] = 10 ## column J
 colMap[ "pdf_comments" ] = 11
